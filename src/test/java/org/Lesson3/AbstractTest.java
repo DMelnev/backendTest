@@ -6,18 +6,15 @@ import org.junit.jupiter.api.BeforeAll;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 public abstract class AbstractTest {
     static Properties properties = new Properties();
-    private static InputStream configFile;
-
+    static String propertiesLink = "src/resources/setup.properties";
 
     @BeforeAll
     static void initTest() throws IOException {
-        configFile = new FileInputStream("src/resources/setup.properties");
-        properties.load(configFile);
+        properties.load(new FileInputStream(propertiesLink));
 
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         RestAssured.baseURI = properties.getProperty("baseUrl");
