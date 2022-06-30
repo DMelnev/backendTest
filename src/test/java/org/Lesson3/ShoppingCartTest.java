@@ -74,7 +74,7 @@ public class ShoppingCartTest extends AbstractTest {
     }
 
     @AfterEach
-    void tearDown() {
+    void clear() {
         given()
                 .queryParam("hash", hash)
                 .delete("/mealplanner/{username}/shopping-list/items/{id}", userName, id)
