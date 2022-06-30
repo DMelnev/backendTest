@@ -1,6 +1,7 @@
-package Lesson3;
+package org.Lesson3;
 
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
 import org.junit.jupiter.api.BeforeAll;
 
 import java.io.FileInputStream;
@@ -11,24 +12,18 @@ import java.util.Properties;
 public abstract class AbstractTest {
     static Properties properties = new Properties();
     private static InputStream configFile;
-    private static String apiKey;
-    private static String baseURL;
 
 
     @BeforeAll
     static void initTest() throws IOException {
         configFile = new FileInputStream("src/resources/setup.properties");
         properties.load(configFile);
-        apiKey = properties.getProperty("apiKey");
-        baseURL = properties.getProperty("baseUrl");
+
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+        RestAssured.baseURI = properties.getProperty("baseUrl");
+        RestAssured.requestSpecification = new RequestSpecBuilder()
+                .addQueryParam("apiKey", properties.getProperty("apiKey"))
+                .build();
     }
 
-    public static String getApiKey() {
-        return apiKey;
-    }
-
-    public static String getBaseURL() {
-        return baseURL;
-    }
 }
