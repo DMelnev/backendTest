@@ -84,6 +84,6 @@ public class ShoppingCartTest extends AbstractTest {
                 .queryParam("hash", hash)
                 .delete("/mealplanner/{username}/shopping-list/items/{id}", userName, id)
                 .then()
-                .statusCode(200);
+                .spec(responseSpecification);
     }
 }
