@@ -1,6 +1,5 @@
 package org.Lesson4;
 
-import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;

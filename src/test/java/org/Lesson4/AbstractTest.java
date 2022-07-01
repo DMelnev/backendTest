@@ -40,6 +40,6 @@ public abstract class AbstractTest {
                 .expectContentType(ContentType.JSON)
                 .expectStatusCode(200)
                 .build();
-        RestAssured.config = RestAssured.config().objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.JACKSON_2));
+//        RestAssured.config = RestAssured.config().objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.JACKSON_2));
     }
 }
