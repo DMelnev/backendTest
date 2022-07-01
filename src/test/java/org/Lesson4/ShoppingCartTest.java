@@ -1,10 +1,12 @@
 package org.Lesson4;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.path.json.JsonPath;
+import org.Lesson4.dto.RequestBuilder;
+import org.Lesson4.dto.RequestShoppingCart;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -16,13 +18,13 @@ public class ShoppingCartTest extends AbstractTest {
     private int id;
 
     @BeforeAll
-    static void getUserData() {
+    static void getUserData() throws JsonProcessingException {
         JsonPath jsonPath = given()
-                .body("{\n" +
-                        "    \"username\": \"" + properties.getProperty("name") + "\",\n" +
-                        "    \"firstName\": \"" + properties.getProperty("name") + "\",\n" +
-                        "    \"lastName\": \"" + properties.getProperty("lastName") + "\",\n" +
-                        "    \"email\": \"" + properties.getProperty("email") + "\"\n}")
+                .body(new ObjectMapper().writeValueAsString(new RequestShoppingCart(
+                        properties.getProperty("name"),
+                        properties.getProperty("lastName"),
+                        properties.getProperty("email")
+                )))
                 .post("/users/connect")
                 .then()
                 .statusCode(200)
@@ -51,22 +53,23 @@ public class ShoppingCartTest extends AbstractTest {
             "500g Strawberry, Strawberry",
             "50ml strong coffee, Coffee"
     })
-    void addToShoppingCartTest(String item, String aisle) {
+    void addToShoppingCartTest(String item, String aisle) throws JsonProcessingException {
         given()
                 .queryParam("hash", hash)
-                .body("{\n" +
-                        "    \"item\": \"" + item + "\",\n" +
-                        "    \"aisle\": \"" + aisle + "\",\n" +
-                        "    \"parse\": true\n}")
+                .body(new ObjectMapper().writeValueAsString(new RequestBuilder()
+                                .setAisle(aisle)
+                                .setItem(item)
+                                .setParse("true")
+                                .build()))
                 .post("/mealplanner/{username}/shopping-list/items", userName)
                 .then()
-                .statusCode(200);
+                .spec(responseSpecification);
 
         id = given()
                 .queryParam("hash", hash)
                 .get("/mealplanner/{username}/shopping-list", userName)
                 .then()
-                .statusCode(200)
+                .spec(responseSpecification)
                 .body("aisles", Matchers.hasSize(1))
                 .body("aisles.aisle", Matchers.hasItems(aisle))
                 .body("aisles.items", Matchers.hasSize(1))
@@ -76,7 +79,7 @@ public class ShoppingCartTest extends AbstractTest {
     }
 
     @AfterEach
-    void clear() {
+    void delete() {
         given()
                 .queryParam("hash", hash)
                 .delete("/mealplanner/{username}/shopping-list/items/{id}", userName, id)

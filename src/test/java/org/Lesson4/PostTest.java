@@ -13,7 +13,7 @@ public class PostTest extends AbstractTest {
 
     @BeforeAll
     public static void setup() {
-        RestAssured.requestSpecification = new RequestSpecBuilder()
+        requestSpecification = new RequestSpecBuilder()
                 .setContentType("application/x-www-form-urlencoded")
                 .build();
     }
@@ -30,9 +30,10 @@ public class PostTest extends AbstractTest {
         String cuisineRequest = "/recipes/cuisine";
         given()
                 .queryParam("title", title)
+                .spec(requestSpecification)
                 .post(cuisineRequest)
                 .then()
-                .statusCode(200)
-                .body("cuisine", Matchers.containsString(cuisine));
+                .spec(responseSpecification)
+                .body("cuisine", Matchers.containsStringIgnoringCase(cuisine));
     }
 }

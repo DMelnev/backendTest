@@ -2,6 +2,7 @@ package org.Lesson4;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.specification.RequestSpecification;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,7 +16,7 @@ public class GetTest extends AbstractTest {
 
     @BeforeAll
     public static void setup() {
-        RestAssured.requestSpecification = new RequestSpecBuilder()
+        requestSpecification = new RequestSpecBuilder()
                 .addQueryParam("number", 10)
                 .build();
     }
@@ -36,10 +37,11 @@ public class GetTest extends AbstractTest {
     public void searchTest(String param) {
         given()
                 .queryParam("query", param)
+                .spec(requestSpecification)
                 .get(complexSearch)
                 .then()
-                .statusCode(200)
-                .body("results[0].title", Matchers.containsString(param));
+                .spec(responseSpecification)
+                .body("results[0].title", Matchers.containsStringIgnoringCase(param));
     }
 
 }
