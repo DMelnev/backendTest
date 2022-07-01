@@ -27,7 +27,7 @@ public class ShoppingCartTest extends AbstractTest {
                 )))
                 .post("/users/connect")
                 .then()
-                .statusCode(200)
+                .spec(responseSpecification)
                 .extract()
                 .body()
                 .jsonPath();
@@ -41,7 +41,7 @@ public class ShoppingCartTest extends AbstractTest {
                 .queryParam("hash", hash)
                 .get("/mealplanner/{username}/shopping-list", userName)
                 .then()
-                .statusCode(200)
+                .spec(responseSpecification)
                 .body("aisles", Matchers.hasSize(0));
     }
 
