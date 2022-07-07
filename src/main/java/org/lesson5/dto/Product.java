@@ -7,9 +7,9 @@ import lombok.Setter;
 @Setter
 public class Product {
 
-    private int id;
+    private Integer id;
     private String title;
-    private int price;
+    private Integer price;
     private String categoryTitle;
 
 

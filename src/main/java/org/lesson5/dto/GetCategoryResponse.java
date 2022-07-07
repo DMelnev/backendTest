@@ -9,7 +9,7 @@ import java.util.ArrayList;
 @Setter
 public class GetCategoryResponse {
 
-        private int id;
+        private Integer id;
         private ArrayList<Product> products = new ArrayList<>();
         private String title;
 
