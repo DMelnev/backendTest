@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 @Getter
 @Setter
-public class GetCategoryResponse {
+public class CategoryResponseDto {
 
         private Integer id;
-        private ArrayList<Product> products = new ArrayList<>();
+        private ArrayList<ProductDto> productDtos = new ArrayList<>();
         private String title;
 
 }

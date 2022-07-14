@@ -1,23 +1,25 @@
 package org.lesson5.api;
 
 import okhttp3.ResponseBody;
-import org.lesson5.dto.Product;
+import org.lesson5.dto.ProductDto;
 import retrofit2.Call;
 import retrofit2.http.*;
 
+import java.util.List;
+
 public interface ProductService {
     @POST("products")
-    Call<Product> createProduct(@Body Product createProductRequest);
+    Call<ProductDto> createProduct(@Body ProductDto productDto);
 
     @DELETE("products/{id}")
     Call<ResponseBody> deleteProduct(@Path("id") int id);
 
-    @PUT("products")
-    Call<Product> modifyProduct(@Body Product modifyProductRequest);
+    @PUT("products/{id}")
+    Call<ProductDto> modifyProduct(@Path("id") int id, @Body ProductDto productDto);
 
     @GET("products/{id}")
-    Call<Product> getProductByID(@Path("id") int id);
+    Call<ProductDto> getProductByID(@Path("id") int id);
 
     @GET("products")
-    Call<ResponseBody> getProducts();
+    Call<List<ProductDto>> getProducts();
 }
