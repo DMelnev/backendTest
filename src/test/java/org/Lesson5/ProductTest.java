@@ -59,6 +59,20 @@ public class ProductTest {
     }
 
     @SneakyThrows
+    @Test
+    void getProductByIdTest() {
+        Response<ProductDto> response = createProduct((int) (Math.random() + 1.5));
+        productDto.setId(response.body().getId());
+        Response<ProductDto> responseNew = getProductService()
+                .getProductByID(productDto.getId())
+                .execute();
+        Assertions.assertTrue(responseNew.isSuccessful());
+        assert responseNew.body() != null;
+        Assertions.assertEquals(productDto, responseNew.body());
+
+    }
+
+    @SneakyThrows
     @AfterEach
     void tearDown() {
         Assertions.assertTrue(
