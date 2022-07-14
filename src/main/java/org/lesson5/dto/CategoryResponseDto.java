@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class CategoryResponseDto {
 
         private Integer id;
-        private ArrayList<ProductDto> productDtos = new ArrayList<>();
+        private ArrayList<ProductDto> products = new ArrayList<>();
         private String title;
 
 }
