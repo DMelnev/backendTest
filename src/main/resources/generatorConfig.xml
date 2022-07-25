@@ -10,7 +10,7 @@
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <jdbcConnection driverClass="org.postgresql.Driver"
-                        connectionURL="jdbc:postgresql://127.0.0.1:5433/postgres"
+                        connectionURL="jdbc:postgresql://127.0.0.1:5432/postgres"
                         userId="postgres"
                         password="123579">
         </jdbcConnection>
