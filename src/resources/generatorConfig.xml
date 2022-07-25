@@ -6,30 +6,30 @@
 
 <generatorConfiguration>
     <classPathEntry
-            location="C:\Users\Install\.m2\repository\org\postgresql\postgresql\42.2.18\postgresql-42.2.18.jar"/>
+            location="C:\Users\Dixon\.m2\repository\org\postgresql\postgresql\42.3.6\postgresql-42.3.6.jar"/>
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <jdbcConnection driverClass="org.postgresql.Driver"
                         connectionURL="jdbc:postgresql://127.0.0.1:5433/postgres"
                         userId="postgres"
-                        password="1">
+                        password="123579">
         </jdbcConnection>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="db.model" targetProject="src/main/java/lesson6">
+        <javaModelGenerator targetPackage="db.model" targetProject="src/main/java/org/lesson6">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="db.mapper.xml" targetProject="src/main/java/lesson6">
+        <sqlMapGenerator targetPackage="db.mapper.xml" targetProject="src/main/java/org/lesson6">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <javaClientGenerator type="XMLMAPPER" targetPackage="db.dao"
-                             targetProject="src/main/java/lesson6">
+                             targetProject="src/main/java/org/lesson6">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
