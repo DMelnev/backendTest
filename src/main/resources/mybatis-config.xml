@@ -16,7 +16,7 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="lesson6\db\mapper\xml\CategoriesMapper.xml"/>
-        <mapper resource="lesson6\db\mapper\xml\ProductsMapper.xml"/>
+        <mapper resource="org\lesson6\db\mapper\xml\CategoriesMapper.xml"/>
+        <mapper resource="org\lesson6\db\mapper\xml\ProductsMapper.xml"/>
     </mappers>
 </configuration>
