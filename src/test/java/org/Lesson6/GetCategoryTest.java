@@ -28,6 +28,7 @@ public class GetCategoryTest {
         categoriesMapper = sqlSession.getMapper(CategoriesMapper.class);
 
     }
+
     @ParameterizedTest
     @CsvSource(value = {
             "1, Food",
@@ -39,7 +40,7 @@ public class GetCategoryTest {
         categoriesExample.createCriteria().andIdEqualTo(id);
 
         Categories selected = categoriesMapper.selectByPrimaryKey(id);
-        Assertions.assertEquals(title,selected.getTitle());
+        Assertions.assertEquals(title, selected.getTitle());
 
     }
 
