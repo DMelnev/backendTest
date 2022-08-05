@@ -3,18 +3,13 @@ package org.Lesson6;
 import com.github.javafaker.Faker;
 import lombok.SneakyThrows;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.session.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.lesson5.dto.ProductDto;
-import org.lesson6.db.dao.CategoriesMapper;
-import org.lesson6.db.dao.ProductsMapper;
-import org.lesson6.db.model.Categories;
-import org.lesson6.db.model.Products;
-import org.lesson6.db.model.ProductsExample;
+import org.lesson6.db.dao.*;
+import org.lesson6.db.model.*;
 
 import java.io.InputStream;
 import java.util.List;
@@ -54,7 +49,7 @@ public class ProductTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2})
     void modifyProductTest(long categoryId) {
-        String newTitle = productDto.getTitle() + "AAA";
+        String newTitle = new Faker().food().ingredient();
         createProduct(categoryId);
 
         Products product = new Products();
@@ -100,7 +95,6 @@ public class ProductTest {
         List<Products> list = productsMapper.selectByExample(example);
         Assertions.assertEquals(1, list.size());
         productDto.setId(Math.toIntExact(list.get(0).getId()));
-//        return product;
 
     }
 
