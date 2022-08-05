@@ -34,7 +34,6 @@ public class ProductTest {
 
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         sqlSession = sqlSessionFactory.openSession();
-        categoriesMapper = sqlSession.getMapper(CategoriesMapper.class);
         productsMapper = sqlSession.getMapper((ProductsMapper.class));
     }
 
