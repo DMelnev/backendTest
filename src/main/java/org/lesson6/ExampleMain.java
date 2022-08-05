@@ -1,4 +1,4 @@
-package org.Lesson6;
+package org.lesson6;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -26,12 +26,12 @@ public class ExampleMain {
             CategoriesMapper categoriesMapper = session.getMapper(CategoriesMapper.class);
             CategoriesExample example = new CategoriesExample();
 
-            example.createCriteria().andIdEqualTo(1L);
+//            example.createCriteria().andIdEqualTo(1L);
             List<Categories> list = categoriesMapper.selectByExample(example);
             System.out.println(categoriesMapper.countByExample(example));
 
             Categories categories = new Categories();
-            categories.setTitle("test");
+            categories.setTitle("test3");
             categoriesMapper.insert(categories);
             session.commit();
 
