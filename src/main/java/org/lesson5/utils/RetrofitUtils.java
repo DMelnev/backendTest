@@ -13,7 +13,7 @@ import java.util.Properties;
 @UtilityClass //make all methods as static
 public class RetrofitUtils {
     static Properties properties = new Properties();
-    static String propertiesLink = "src/resources/setup.properties";
+    static String propertiesLink = "src/main/resources/setup.properties";
 
     static {
         try {
