@@ -35,6 +35,7 @@ public class ProductTest {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         sqlSession = sqlSessionFactory.openSession();
         productsMapper = sqlSession.getMapper((ProductsMapper.class));
+        System.out.println("\u001B31;1mhello world!");
     }
 
     @ParameterizedTest
